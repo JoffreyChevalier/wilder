@@ -1,0 +1,37 @@
+# Création d'un skill
+POST http://localhost:5000/skills
+Content-Type: application/json
+
+{
+    "name": "PHP"
+}
+
+###
+
+# Liste de tout les skills
+GET http://localhost:5000/skills
+Content-Type: application/json
+
+
+###
+
+# Retrouvé un skill par son ID
+GET http://localhost:5000/skills/3
+Content-Type: application/json
+
+
+###
+
+# Mettre à jour un skill
+PATCH http://localhost:5000/skills/1
+Content-Type: application/json
+
+{
+  "name": "PHP"
+}
+
+###
+
+# Supprimer un skill
+DELETE http://localhost:5000/skills/2
+Content-Type: application/json
