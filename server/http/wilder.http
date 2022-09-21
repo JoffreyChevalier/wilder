@@ -4,7 +4,8 @@ Content-Type: application/json
 
 {
     "name": "test",
-    "bio": "test"
+    "bio": "test",
+    "city": "test"
 }
 
 ###
@@ -16,38 +17,39 @@ Content-Type: application/json
 ###
 
 # Retrouver un Wilder par son ID
-GET http://localhost:5000/wilders/1
+GET http://localhost:5000/wilders/6
 Content-Type: application/json
 
 
 ###
 
 # Mettre à jour un wilder
-PATCH http://localhost:5000/wilders/1
+PATCH http://localhost:5000/wilders/6
 Content-Type: application/json
 
 {
-  "name": "Joffrey"
+  "city":"test2",
+  "bio": "test2"
 }
 
 ###
 
 # Supprimer un Wilder
-DELETE http://localhost:5000/wilders/16
+DELETE http://localhost:5000/wilders/9
 Content-Type: application/json
 
 ###
 
-# Ajout d'un skill
-POST http://localhost:5000/wilders/4/skills
+# Ajout d'un skill à un wilder
+POST http://localhost:5000/wilders/1/skills
 Content-Type: application/json
 
 {
-    "id": 4
+    "id": 1
 }
 
 ###
 
-# Suppression d'un skill
+# Suppression d'un skill à un wilder
 DELETE  http://localhost:5000/wilders/4/skills/2
 Content-Type: application/json

@@ -3,7 +3,7 @@ POST http://localhost:5000/skills
 Content-Type: application/json
 
 {
-    "name": "PHP"
+    "name": "Node"
 }
 
 ###
@@ -16,22 +16,22 @@ Content-Type: application/json
 ###
 
 # Retrouvé un skill par son ID
-GET http://localhost:5000/skills/3
+GET http://localhost:5000/skills/5
 Content-Type: application/json
 
 
 ###
 
 # Mettre à jour un skill
-PATCH http://localhost:5000/skills/1
+PATCH http://localhost:5000/skills/5
 Content-Type: application/json
 
 {
-  "name": "PHP"
+  "name": "Java"
 }
 
 ###
 
 # Supprimer un skill
-DELETE http://localhost:5000/skills/2
+DELETE http://localhost:5000/skills/6
 Content-Type: application/json

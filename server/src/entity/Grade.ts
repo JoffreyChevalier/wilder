@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 import Skill from "./Skill"
 import Wilder from "./Wilder"
 
@@ -12,17 +12,16 @@ class Grade {
     votes: number
 
     @Column()
-    skillId: number
+    skillsId: number
 
     @Column()
-    wilderId: number
+    wildersId: number
 
+    @ManyToOne(() => Wilder, (w) => w.grades)
+    wilders: Wilder
 
-    @OneToMany(() => Wilder, (w) => w.grades)
-    wilder: Wilder
-
-    @OneToMany(() => Skill, (s) => s.grades)
-    skill: Skill
+    @ManyToOne(() => Skill, (s) => s.grades)
+    skills: Skill
 
 }
 

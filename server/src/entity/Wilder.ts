@@ -7,17 +7,16 @@ class Wilder {
   id: number
 
   @Column()
-  name: string
+  name?: string
 
-  @Column({ nullable: true, length: 100 })
+  @Column({ nullable: true, length: 100, type: "varchar" })
   city: string | null
 
-  @Column({ length: 100 })
+  @Column({ nullable: true, length: 500, type: "text" })
+  bio: string | null
 
-
-  @OneToMany(() => Grade, (g) => g.wilder)
-  grade: Grade[]
-
+  @OneToMany(() => Grade, (g) => g.wilders)
+  grades: Grade[]
 }
 
 export default Wilder

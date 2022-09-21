@@ -28,4 +28,4 @@ const start = async (): Promise<void> => {
   app.listen(5000, () => console.log('Server started on 5000'));
 };
 
-start();
+void start();
