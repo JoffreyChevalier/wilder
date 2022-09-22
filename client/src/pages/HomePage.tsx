@@ -6,8 +6,7 @@ import { IWilder } from '../types/IWilder';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Wilder from '../components/Wilder';
-import NewWilderForm from '../components/NewWilderForm';
-
+import AddWilderForm from '../components/AddWilderForm';
 function HomePage() {
   const [wildersData, setWildersData] = useState<IWilder[]>([]);
   const [isLaoding, setIsLaoding] = useState(false);
@@ -34,7 +33,7 @@ function HomePage() {
         'Chargement...'
       ) : (
         <>
-          <NewWilderForm loadWildersData={loadWildersData} />
+          <AddWilderForm loadWildersData={loadWildersData} />
           <main className='container'>
             <h2>Wilders</h2>
             <section className='card-row'>

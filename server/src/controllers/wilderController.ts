@@ -36,7 +36,13 @@ const wilderController: IController = {
     const wilders = await dataSource.getRepository(Wilder).find({ relations: { grades: { skills: true } } });
 
     try {
-      res.send(wilders.map(w => ({ ...w, grades: undefined, skills: w.grades.map(g => ({ id: g.skills.id, name: g.skills.name, votes: g.votes })) })));
+      res.send(wilders.map(w => ({
+        ...w, grades: undefined, skills: w.grades.map(g => ({
+          id: g.skills.id,
+          name: g.skills.name,
+          votes: g.votes
+        }))
+      })));
     } catch (err) {
       res.send('error while finding wilders');
     }
@@ -122,6 +128,8 @@ const wilderController: IController = {
         res.sendStatus(404);
       }
     } catch (err) {
+      console.log(err);
+
       res.send('error while deleting wilder');
     }
   },
@@ -143,7 +151,7 @@ const wilderController: IController = {
 
       const skillToAdd = await dataSource
         .getRepository(Skill)
-        .findOneBy({ id: req.body.id });
+        .findOneBy({ id: req.body.skillId });
 
       if (wilderToUpdate === null) {
         return res.sendStatus(404);

@@ -12,7 +12,7 @@ interface WilderProps {
 }
 
 function Wilder({
-  wilder: { id, name, bio, skills = [] },
+  wilder: { id, name, city, bio, skills = [] },
   loadWildersData,
 }: WilderProps) {
   const [processing, setProcessing] = useState(false);
@@ -40,6 +40,7 @@ function Wilder({
       </button>
       <img src={blank_profile} alt={`${name} Profile`} />
       <h3>{name}</h3>
+      <h6>{city}</h6>
       <p>{bio} </p>
       <h4>Wild Skills</h4>
       <ul className='skills'>

@@ -24,10 +24,11 @@ Content-Type: application/json
 ###
 
 # Mettre à jour un wilder
-PATCH http://localhost:5000/wilders/6
+PATCH http://localhost:5000/wilders/28
 Content-Type: application/json
 
 {
+  "name":"test2",
   "city":"test2",
   "bio": "test2"
 }
@@ -35,7 +36,7 @@ Content-Type: application/json
 ###
 
 # Supprimer un Wilder
-DELETE http://localhost:5000/wilders/5
+DELETE http://localhost:5000/wilders/30
 Content-Type: application/json
 
 ###
@@ -45,11 +46,11 @@ POST http://localhost:5000/wilders/1/skills
 Content-Type: application/json
 
 {
-    "id": 1
+    "id": 4
 }
 
 ###
 
 # Suppression d'un skill à un wilder
-DELETE  http://localhost:5000/wilders/4/skills/2
+DELETE  http://localhost:5000/wilders/28/skills/1
 Content-Type: application/json
