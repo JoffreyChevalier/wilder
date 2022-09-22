@@ -89,6 +89,7 @@ const wilderController: IController = {
         .update(req.params.id, req.body);
 
       if (affected !== null) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         res.send(`${wilder.name} has been updated 👍`);
       } else {
         res.sendStatus(404);
@@ -115,6 +116,7 @@ const wilderController: IController = {
         .delete(req.params.id);
 
       if (affected !== null) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         res.send(`${wilder.name} has been deleted ❌`);
       } else {
         res.sendStatus(404);

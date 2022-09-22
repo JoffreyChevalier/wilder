@@ -35,7 +35,7 @@ Content-Type: application/json
 ###
 
 # Supprimer un Wilder
-DELETE http://localhost:5000/wilders/9
+DELETE http://localhost:5000/wilders/5
 Content-Type: application/json
 
 ###
