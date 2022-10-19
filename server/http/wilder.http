@@ -3,9 +3,9 @@ POST http://localhost:5000/wilders
 Content-Type: application/json
 
 {
-    "name": "test",
-    "bio": "test",
-    "city": "test"
+    "name": "Joffrey",
+    "bio": "Ceci et le premier create :)",
+    "city": "Bordeaux (33)"
 }
 
 ###

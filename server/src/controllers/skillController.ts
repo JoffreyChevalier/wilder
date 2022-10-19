@@ -1,112 +1,78 @@
-import dataSource from '../utils'
-import Skill from '../entity/Skill';
-import IController from '../types/IController';
+import { IController } from "../types/IController";
 
+import datasource from "../utils";
+import Skill from "../entity/Skill";
 
-const skillController: IController = {
-  createSkill: async (req, res) => {
+const skillsController: IController = {
+  create: async (req, res) => {
     const { name } = req.body;
-    const isSkillExist = await dataSource
+    if (name.length > 100 || name.length === 0) {
+      return res
+        .status(422)
+        .send("the name should have a length between 1 and 100 characters");
+    }
+
+    const existingSkill = await datasource
       .getRepository(Skill)
       .findOneBy({ name });
 
-    if (isSkillExist !== null) {
-      return res.status(409).send('This skill already exist');
-    }
-
-    if (name.length > 100 || name.length === 0) {
-      return res.status(422).send('Min. 1 character , Max. 100 characters');
-    }
-
+    if (existingSkill !== null)
+      return res.status(409).send("a skill with this name already exists");
 
     try {
-      const createdSkill = await dataSource.getRepository(Skill).save({ name });
-      res.status(201).send(createdSkill);
+      const created = await datasource.getRepository(Skill).save({ name });
+      res.status(201).send(created);
     } catch (err) {
-      res.send('Error while created skill');
+      console.error(err);
+      res.send("error while creating skill");
     }
   },
-
-  getSkills: async (req, res) => {
-    const skills = await dataSource.getRepository(Skill).find();
-
+  read: async (req, res) => {
     try {
+      const skills = await datasource.getRepository(Skill).find();
       res.send(skills);
     } catch (err) {
-      res.send('error while finding skills');
+      console.error(err);
+      res.send("error while reading skills");
     }
   },
-
-  getSkill: async (req, res) => {
-    const skill = await dataSource
-      .getRepository(Skill)
-      .findOneBy({ id: parseInt(req.params.id) });
-
-    try {
-      if (skill === null) {
-        res.sendStatus(404);
-      } else {
-        res.send(skill);
-      }
-    } catch (err) {
-      res.send('error while finding skill');
-    }
-  },
-
-  updateSkill: async (req, res) => {
+  update: async (req, res) => {
     const { name } = req.body;
+    if (name.length > 100 || name.length === 0) {
+      return res
+        .status(422)
+        .send("the name should have a length between 1 and 100 characters");
+    }
 
-    const isSkillExist = await dataSource
+    const existingSkill = await datasource
       .getRepository(Skill)
-      .findOneBy({ id: parseInt(req.params.id) });
+      .findOneBy({ name });
 
-    if (isSkillExist === null) {
-      return res.status(404).send("This skill don't exist");
-    }
-
-    if (name?.length > 100 || name?.length === 0) {
-      return res.status(422).send('Min. 1 character , Max. 100 characters');
-    }
+    if (existingSkill !== null)
+      return res.status(409).send("a skill with this name already exists");
 
     try {
-      const { affected } = await dataSource
+      const { affected } = await datasource
         .getRepository(Skill)
         .update(req.params.id, req.body);
-
-      if (affected !== null) {
-        res.send('Skill updated 👍');
-      } else {
-        res.sendStatus(404);
-      }
+      if (affected !== 0) return res.send("skill updated");
+      res.sendStatus(404);
     } catch (err) {
-      res.send('error while updating skill');
+      console.error(err);
+      res.send("error while updating skill");
     }
   },
-
-  deleteSkill: async (req, res) => {
-
-    const isSkillExist = await dataSource
-      .getRepository(Skill)
-      .findOneBy({ id: parseInt(req.params.id) });
-
-    if (isSkillExist === null) {
-      return res.status(404).send("This skill don't exist");
-    }
-
+  delete: async (req, res) => {
     try {
-      const { affected } = await dataSource
+      const { affected } = await datasource
         .getRepository(Skill)
         .delete(req.params.id);
-
-      if (affected !== null) {
-        res.send('Skill deleted ❌');
-      } else {
-        res.sendStatus(404);
-      }
+      if (affected !== 0) return res.send("skill deleted");
+      res.sendStatus(404);
     } catch (err) {
-      res.send('error while deleting skill');
+      console.error(err);
     }
   },
 };
 
-export default skillController
+export default skillsController;

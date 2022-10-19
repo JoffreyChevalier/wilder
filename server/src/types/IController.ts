@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-interface IController { [key: string]: (arg0: Request, arg1: Response) => {} }
-
-export default IController
+export interface IController {
+    [key: string]: (req: Request, res: Response) => void;
+}
