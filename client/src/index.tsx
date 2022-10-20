@@ -1,20 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from '@material-tailwind/react';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from '@apollo/client';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './css/index.css';
 
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache(),
+});
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 

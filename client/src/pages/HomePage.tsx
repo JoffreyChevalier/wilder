@@ -1,47 +1,29 @@
-import { useEffect, useState } from 'react';
-
-import { getWilders } from '../services/wilder';
-import { IWilder } from '../types/IWilder';
-
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Wilder from '../components/Wilder';
-import AddWilderForm from '../components/AddWilderForm';
+import { useWildersQuery } from '../graphql/generated/schema';
+
 function HomePage() {
-  const [wildersData, setWildersData] = useState<IWilder[]>([]);
-  const [isLaoding, setIsLaoding] = useState(false);
+  const { loading: isLoading, data, refetch } = useWildersQuery();
+  console.log(data);
 
-  const loadWildersData = async () => {
-    setIsLaoding(true);
-    try {
-      setWildersData(await getWilders());
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLaoding(false);
-    }
-  };
-
-  useEffect(() => {
-    loadWildersData();
-  }, []);
-
+  const wildersData = data?.wilders || [];
   return (
     <div>
       <Header />
-      {isLaoding ? (
+      {isLoading ? (
         'Chargement...'
       ) : (
         <>
-          <AddWilderForm loadWildersData={loadWildersData} />
+          {/* <AddWilderForm loadWildersData={refetch} /> */}
           <main className='container'>
-            <h2>Wilders</h2>
+            <h2>Wildersssss</h2>
             <section className='card-row'>
               {wildersData.map((wilder) => (
                 <Wilder
                   key={wilder.id}
                   wilder={wilder}
-                  loadWildersData={loadWildersData}
+                  loadWildersData={refetch}
                 />
               ))}
             </section>

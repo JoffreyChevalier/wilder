@@ -1,0 +1,16 @@
+FROM node:lts-alpine
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm i
+
+COPY tsconfig.json ./
+COPY src ./src
+COPY public ./public
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
+COPY codegen.yml ./
+
+CMD npm start
